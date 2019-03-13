@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jumbotron.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style>
+	  <style>
       html,
           body {
             height: 100%;
@@ -28,7 +29,8 @@
             display: flex;
             -ms-flex-align: center;
             align-items: center;
-            padding-top: 40px;
+            /* padding-top: 40px; */
+            padding-top: 3.5rem;
             padding-bottom: 40px;
             background-color: #f5f5f5;
           }
@@ -67,14 +69,78 @@
 
   </head>
   <body>
-    <div class="container" style="width: 600px;">
+    <div class="container" style="width: 650px;">
       <div class="row">
-        <div class="col-lg-12">
-          <h1 class="text-center">Welcome to TokenManger</h1>
-            <form class="form-signin">
-              <!-- <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+	  	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  <a class="navbar-brand" href="#">TokenManager</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				    <a class="nav-link" href="explorer.html">Transaction History <span class="sr-only">(current)</span></a>
+			  </li>
+        <!-- <li class="nav-item active">
+           <a class="nav-link" href="explorer.html">Transaction History <span class="sr-only">(current)</span></a>
+       </li> -->
+
+			</ul>
+			<form class="form-inline my-0 my-lg-0">
+			  <a class="nav-link" href="employe.html" id="signinid" >Sign In <span class="sr-only">(current)</span></a>
+			  <button class="btn btn-outline-primary my-0 my-sm-0" id="loginid" type="button" data-toggle="modal" data-target="#loginModal">Log In</button>
+         <button class="btn btn-outline-primary my-0 my-sm-0" id="logoutid" type="button" data-toggle="modal" data-target="#loginModal">Log Out</button>
+			</form>
+		  </div>
+		</nav>
+	   <div class="jumbotron" id="helloworld">
+			<div class="container">
+			  <h1 class="display-3">Hello, world!</h1>
+			  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+			  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+			</div>
+		</div>
+        <div class="col-lg-12 jumbotron">
+          <h1 class="text-center">TOKEN MANAGER</h1>
+          <!-- <a href="explorer.html"> Transaction History </a> -->
+          <hr/>
+          <div id="loader">
+            <p id="employeeAddressId" class="text-center">
+            </p>
+            <p id="employeePosition" class="text-center">
+            </p>
+          </div>
+          <div id="infoAccount">
+            <p id="infoAccountBalance" class="text-center">
+
+            </p>
+            <form id="formBtn" class="text-center">
+              <button type="button" class="btn btn-primary" onclick="App.receiveToken();" id="btnRec">Receive</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendTokenModal"  id="btnSen">Send</button>
+            </form>
+          </div>
+
+		  <div id="whatsnew" class="col-lg-12">
+                  <h3>What's new in Amaris Teams</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/>
+                    Pellentesque pellentesque eu leo nec laculis. Vestibulum tristique qui erat id fringilla. <br/>
+                    Ut in dolor odio. Nullam dui mi, posuere nec lectus at, feugiat mattis leo. <br/>
+                    Suspendisse eget commode lorem, accumsan laoreet enim.
+                  </p>
+            </div>
+
+
+
+
+
+          <!--  <div class="col-lg-12" id="logindiv">
+		  <h1 class="text-center">Welcome to TokenManager</h1>
+		  <form class="form-signin">
+
               <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
-              <h4 class="h4 text-center">or <a href="employe.html"> create a new account </a></h4>
+              <h4 class="h4 text-center">or <a href="employee.html"> create a new account </a></h4>
               <br/>
               <label for="inputEmail" class="sr-only">Email address</label>
               <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -82,18 +148,90 @@
               <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
               <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="App.infoEmployee();">Sign in</button>
-
             </form>
+			</div>
+			-->
+
+
+
+
+			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Welcome to TokenManger</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					<form class="form-signin">
+						  <h1 class="h3 mb-3 font-weight-normal text-center">Connexion</h1>
+
+						  <br/>
+						  <label for="inputEmail" class="sr-only">Email address</label>
+						  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+						  <label for="inputPassword" class="sr-only">Password</label>
+						  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+						</form>
+				  </div>
+				  <div class="modal-footer">
+				   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="App.infoEmployee();">Sign in</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+
+      <div class="modal fade" id="sendTokenModal" tabindex="-1" role="dialog" aria-labelledby="sendTokenModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TokenManager - Send Token</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <form id="formSend">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="addressTo">Address</label>
+                    <div class="col-sm-9">
+                       <input type="text" id="addressTo" class="form-control validate" placeholder="Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="nbTokenS">Amount</label>
+                    <div class="col-sm-9">
+                       <input type="text" id="nbTokenS" class="form-control validate" placeholder="Amount">
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label" for="passwordsnd">Password</label>
+                  <div class="col-sm-9">
+                     <input type="password" id="passwordsnd" class="form-control validate" placeholder="Password">
+                  </div>
+                </div>
+
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="App.sendToken();">Send</button>
+          </div>
+        </div>
+        </div>
+      </div>
+
 
         </div>
       </div>
     </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/app.js"></script>
-
   </body>
 </html>

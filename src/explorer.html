@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Token Manager - Blockchain transaction</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" style="width: 650px;">
+      <div class="row">
+	  	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  <a class="navbar-brand" href="#">TokenManager</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+			  <!-- <li class="nav-item active">
+				    <a class="nav-link" href="explorer.html">Transaction History <span class="sr-only">(current)</span></a>
+			  </li> -->
+        <li class="nav-item active">
+           <a class="nav-link" href="explorer.html">Transaction History <span class="sr-only">(current)</span></a>
+       </li>
+
+			</ul>
+			<!-- <form class="form-inline my-0 my-lg-0">
+			  <a class="nav-link" href="employe.html" id="signinid" >Sign In <span class="sr-only">(current)</span></a>
+			  <button class="btn btn-outline-primary my-0 my-sm-0" id="loginid" type="button" data-toggle="modal" data-target="#loginModal">Log In</button>
+         <button class="btn btn-outline-primary my-0 my-sm-0" id="logoutid" type="button" data-toggle="modal" data-target="#loginModal">Log Out</button>
+			</form> -->
+		  </div>
+		</nav>
+	   <!-- <div class="jumbotron" id="helloworld">
+			<div class="container">
+			  <h1 class="display-3">Hello, world!</h1>
+			  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+			  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+			</div>
+		</div> -->
+        <div class="col-lg-12 jumbotron">
+          <h1 class="text-center">Transaction History</h1>
+          <br/>
+              <table class="table table-hover bordered table-sm">
+                <thead class="text-center">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Hash</th>
+                    <th scope="col">Address from</th>
+                    <th scope="col">Address to</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date </th>
+                    <th scope="col">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+     var provider = 'http://localhost:7545'; // Add your quiknode HTTP provider link here
+     var web3Provider = new Web3.providers.HttpProvider(provider);
+     var web3 = new Web3(web3Provider);
+     var latestBlock = web3.eth.blockNumber;
+     // List blocks in table
+     for (var i = 0; i <= latestBlock ; i++) {
+       var block = web3.eth.getBlock(latestBlock - i);
+       var number = block.number;
+       var hash = block.hash;
+       var time = block.timestamp;
+       var date = new Date(time*1000).toLocaleString();
+       if (block.transactions != null) {
+         var transactionHash = block.transactions[0];
+         var trans = web3.eth.getTransactionReceipt(transactionHash);
+         if (trans != null) {
+           var from1 = (trans.from != null) ? trans.from : '';
+           var to1 = (trans.to != null) ?  trans.to : '';
+           var nbtoken = (trans.logs != null && trans.logs.length != 0 ) ? parseInt(trans.logs[0].data,16) : '';
+         }
+
+        // var recpt = web3.eth.getTransactionReceipt(transactionHash);
+        // var nbtoken = (recpt != null && recpt.logs != null && recpt.logs.length != 0 ) ? parseInt(recpt.logs[0].data,16) : '';
+       }
+
+
+       $('tbody').append("<tr><td>" + number + "</td><td>" + transactionHash + "</td><td>" + from1 + "</td><td>" + to1
+         + "</td><td>" + nbtoken  + "</td><td>" + date + "</td><td>" + time + "</td></tr>");
+     }
+   </script>
+  </body>
+</html>

@@ -721,7 +721,7 @@ App = {
               "signature": "0xdc39d06d"
             }
           ];
-        var amacoinAddress = '0x0A97D031f089e02b7277f765a377E0024D36bBBb';
+        var amacoinAddress = '0x408fB1F3Cbf729A8658dF94626ad972e7509c1a7';
         App.contracts.AmaCoin = new web3.eth.Contract(amaCoinABI,amacoinAddress);
         var c = await web3.eth.getAccounts();
         App.account = c != null ? c[0] : '0x0';
@@ -771,7 +771,7 @@ App = {
         App.contracts.AmaCoin.methods.createEmployee(email, addressId, password, position, lastname, firstname)
                                       .send({from: App.account, gas: 3000000}).then(function(result){
                                             console.log('Employé n° '+ result);
-                                          alert('Employé n°'+result+' ajouté');
+                                          alert('Employé ajouté');
                                           window.location.href='./index.html';
                                         }).catch(function(err) {
                                           console.error(err);
@@ -860,6 +860,13 @@ App = {
         else {
           $("#btnSen").prop('disabled', false);
         }
+        if (balance >= 80) {
+          $("#btnTrain").prop('disabled', false);
+        }
+        if (balance >= 160) {
+          $("#btnHol").prop('disabled', false);
+        }
+
       },
 
       getInfoEmployee: function(){
@@ -1005,9 +1012,41 @@ App = {
 
 },
 
-    openformSend : function(){
+requestDayOff: function(){
 
-    },
+    var pass = $("#passwordrdo").val();
+    var balance = parseInt(App.balance);
+    if (pass == App.employee.password) {
+
+      var from = App.employee.addressId;
+        App.contracts.AmaCoin.methods.transferToken(from, App.account, 160).send({from: App.account, gas: 3000000}).then(function(result){
+                alert('Request sent');
+                App.getInfoEmployee();
+                $('#requestDayOffModal').modal('hide');
+          }).catch(function(err) {
+            console.error(err);
+            alert("An error was occured. Please let's try again");
+          });
+        }
+},
+
+requestTrainingPackage: function(){
+
+  var pass = $("#passwordsnd").val();
+  var balance = parseInt(App.balance);
+  if (pass == App.employee.password) {
+
+    var from = App.employee.addressId;
+      App.contracts.AmaCoin.methods.transferToken(from, App.account, 80).send({from: App.account, gas: 3000000}).then(function(result){
+              alert('Request sent');
+              App.getInfoEmployee();
+              $('#requestTrainingModal').modal('hide');
+        }).catch(function(err) {
+          console.error(err);
+          alert("An error was occured. Please let's try again");
+        });
+      }
+},
 
 };
 

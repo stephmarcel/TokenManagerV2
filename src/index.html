@@ -94,13 +94,13 @@
 			</form>
 		  </div>
 		</nav>
-	   <div class="jumbotron" id="helloworld">
+	   <!-- <div class="jumbotron" id="helloworld">
 			<div class="container">
 			  <h1 class="display-3">Hello, world!</h1>
 			  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
 			  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
 			</div>
-		</div>
+		</div> -->
         <div class="col-lg-12 jumbotron">
           <h1 class="text-center">TOKEN MANAGER</h1>
           <!-- <a href="explorer.html"> Transaction History </a> -->
@@ -118,16 +118,15 @@
             <form id="formBtn" class="text-center">
               <button type="button" class="btn btn-primary" onclick="App.receiveToken();" id="btnRec">Receive</button>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendTokenModal"  id="btnSen">Send</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestDayOffModal" id="btnHol" disabled>Request holiday</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTrainingModal"  id="btnTrain" disabled>Request training package</button>
             </form>
           </div>
 
 		  <div id="whatsnew" class="col-lg-12">
                   <h3>What's new in Amaris Teams</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/>
-                    Pellentesque pellentesque eu leo nec laculis. Vestibulum tristique qui erat id fringilla. <br/>
-                    Ut in dolor odio. Nullam dui mi, posuere nec lectus at, feugiat mattis leo. <br/>
-                    Suspendisse eget commode lorem, accumsan laoreet enim.
+                    This is a space where you can publically celebrate the acheivements of your teams
                   </p>
             </div>
 
@@ -221,6 +220,63 @@
         </div>
         </div>
       </div>
+
+      <div class="modal fade" id="requestDayOffModal" tabindex="-1" role="dialog" aria-labelledby="sendTokenModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TokenManager - Request a day off</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <form id="formrdo">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label" for="passwordrdo">Password</label>
+                  <div class="col-sm-9">
+                     <input type="password" id="passwordrdo" class="form-control validate" placeholder="Password">
+                  </div>
+                </div>
+
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="App.requestDayOff();">Send</button>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="requestTrainingModal" tabindex="-1" role="dialog" aria-labelledby="sendTokenModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TokenManager - Request a training package</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <form id="formrtp">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label" for="passwordrtp">Password</label>
+                  <div class="col-sm-9">
+                     <input type="password" id="passwordrtp" class="form-control validate" placeholder="Password">
+                  </div>
+                </div>
+
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="App.requestTrainingPackage();">Request</button>
+          </div>
+        </div>
+        </div>
+      </div>
+
 
 
         </div>

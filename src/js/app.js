@@ -926,6 +926,9 @@ App = {
       App.contracts.AmaCoin.methods.balanceOf(addressId).call().then(function(balance){
         var bal = parseInt(balance);
         App.balance = bal;
+        App.displayBalance(bal,App.employee);
+      //  $("#infoAccountBalance").html("<h3  class='text-center'>  Balance  </h3><br/>  <h1  class='text-center'>"+ bal +" AmaCoin  </h1><br/>");
+
        }).catch(function(e) {
          console.error(e);
          alert("An error was occured. Please let's try again");
